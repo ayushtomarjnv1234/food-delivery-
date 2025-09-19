@@ -8,7 +8,7 @@ console.log(process.env.STRIPE_SECRET_KEY);
 //placing user order for frontend
 const placeOrder = async (req,res) => {
 
-    const frontend_url = "https://food-del-frontend-app.vercel.app/"
+    const frontend_url = "https://food-del-frontend-app.vercel.app"
 
     try {
         const newOrder = new orderModel({
@@ -33,7 +33,7 @@ const placeOrder = async (req,res) => {
 
         line_items.push({
             price_data:{
-                currency:"usd",
+                currency:"inr",
                 product_data:{
                     name:"Delivery Charges"
                 },
