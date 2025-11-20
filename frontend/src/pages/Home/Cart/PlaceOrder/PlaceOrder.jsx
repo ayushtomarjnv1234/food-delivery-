@@ -121,7 +121,7 @@ const PlaceOrder = () => {
                   <p>Cash on Delivery</p>
             </div>
           </div>
-          <button type='submit'>PROCEED TO PAYMENT</button>
+          <button type='submit'>PROCEED TO PAYMENT ({paymentMethod === "COD" ? "COD" : "Stripe"})</button>
         </div>
       </div>
     </form>
