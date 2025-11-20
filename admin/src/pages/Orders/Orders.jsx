@@ -14,7 +14,7 @@ const Orders = ({url}) => {
     const response = await axios.get(url+"/api/order/list");
     if (response.data.success) {
       setOrders(response.data.data);
-      console.log(response.data.data);
+      console.log("Fetched Orders:", response.data.data); // Debug log
       
     }
     else{
@@ -64,7 +64,9 @@ const Orders = ({url}) => {
               <p className="order-item-phone">{order.address.phone}</p>
              </div>
              <p>Items: {order.items.length}</p>
-             <p>${order.amount}</p>
+             <p>₹{order.amount}</p>
+             <p>Method: {order.paymentMethod === "COD" ? "Cash on Delivery" : "Stripe"}</p>
+             <p>Date: {new Date(order.date).toLocaleString()}</p>
              <select onChange={(event)=>statusHandler(event,order._id)} value={order.status}>
               <option value="Food Processing">Food Processing</option>
               <option value="Out for delivery">Out for delivery</option>
