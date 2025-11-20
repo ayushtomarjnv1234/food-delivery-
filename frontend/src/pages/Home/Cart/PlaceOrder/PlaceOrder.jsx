@@ -18,7 +18,7 @@ const PlaceOrder = () => {
     country:"",
     phone:""
   })
-  const [paymentMethod, setPaymentMethod] = useState("Stripe");
+  const [paymentMethod, setPaymentMethod] = useState("COD");
 
   const onChangeHandler = (event) => {
     const name = event.target.name;
