@@ -27,7 +27,7 @@ app.use("/api/order",orderRouter)
 
 
 app.get("/",(req,res)=>{
-    res.send("API Working")
+    res.send("API Working - v2 (COD Supported)")
 })
 
 app.listen(port , ()=>{
