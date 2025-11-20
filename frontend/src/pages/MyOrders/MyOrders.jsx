@@ -37,7 +37,7 @@ const MyOrders = () => {
                        }
                    })}</p>
                    <p>₹{order.amount}.00</p>
-                   <p>Method: {order.paymentMethod}</p>
+                   <p>Method: {order.paymentMethod === "COD" ? "Cash on Delivery" : order.paymentMethod || "Stripe"}</p>
                    <p>ID: {order._id.slice(-4)}</p>
                    <p>Date: {new Date(order.date).toLocaleString()}</p>
                    <p>Items: {order.items.length}</p>
