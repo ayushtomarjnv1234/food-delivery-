@@ -26,6 +26,8 @@ const placeOrder = async (req,res) => {
             paymentMethod: paymentMethod,
             date: Date.now()
         })
+        
+        console.log("Saving Order:", newOrder); // Debug log
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId,{cartData:{}});
 

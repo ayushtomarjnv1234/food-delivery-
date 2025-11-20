@@ -30,7 +30,7 @@ app.use("/api/order",orderRouter)
 
 app.get("/",(req,res)=>{
     const schemaKeys = Object.keys(orderModel.schema.paths);
-    res.send(`API Working - v6 (Forced Fallback). Schema: ${schemaKeys.join(", ")}`)
+    res.send(`API Working - v7 (Model Reset). Schema: ${schemaKeys.join(", ")}`)
 })
 
 app.listen(port , ()=>{

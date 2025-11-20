@@ -11,5 +11,10 @@ const orderSchema = new mongoose.Schema({
     paymentMethod:{type:String,default:"Pending"}
 })
 
-const orderModel = mongoose.models.order || mongoose.model("order",orderSchema);
+// Force model recompilation if schema changed (Debug fix)
+if (mongoose.models.order) {
+    delete mongoose.models.order;
+}
+
+const orderModel = mongoose.model("order",orderSchema);
 export default orderModel;
