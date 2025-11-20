@@ -12,22 +12,19 @@ const placeOrder = async (req,res) => {
 
     try {
         console.log("Place Order Request Body:", req.body); // Debug log
+        console.log("Payment Method Received:", req.body.paymentMethod); // Debug log
         
-        let paymentMethod = req.body.paymentMethod;
-        if (!paymentMethod) {
-            paymentMethod = "Server_Fallback_COD";
-        }
+        const paymentMethod = req.body.paymentMethod || "COD";
 
         const newOrder = new orderModel({
             userId:req.body.userId,
             items:req.body.items,
             amount:req.body.amount,
             address:req.body.address,
-            paymentMethod: paymentMethod,
-            date: Date.now()
+            paymentMethod: paymentMethod
         })
         
-        console.log("Saving Order:", newOrder); // Debug log
+        console.log("Order to Save:", JSON.stringify(newOrder, null, 2)); // Debug log
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId,{cartData:{}});
 

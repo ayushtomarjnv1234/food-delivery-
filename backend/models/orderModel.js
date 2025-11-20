@@ -8,7 +8,7 @@ const orderSchema = new mongoose.Schema({
     status:{type:String,default:"Food Processing"},
     date:{type:Date,default:Date.now},
     payment:{type:Boolean,default:false},
-    paymentMethod:{type:String,default:"Pending"}
+    paymentMethod:{type:String,required:true}
 })
 
 // Force model recompilation if schema changed (Debug fix)
