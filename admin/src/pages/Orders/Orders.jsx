@@ -65,7 +65,7 @@ const Orders = ({url}) => {
              </div>
              <p>Items: {order.items.length}</p>
              <p>₹{order.amount}</p>
-             <p>Method: {order.paymentMethod === "COD" ? "Cash on Delivery" : "Stripe"}</p>
+             <p>Method: {order.paymentMethod}</p>
              <p>Date: {new Date(order.date).toLocaleString()}</p>
              <select onChange={(event)=>statusHandler(event,order._id)} value={order.status}>
               <option value="Food Processing">Food Processing</option>
