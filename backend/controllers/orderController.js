@@ -12,12 +12,18 @@ const placeOrder = async (req,res) => {
 
     try {
         console.log("Place Order Request Body:", req.body); // Debug log
+        
+        let paymentMethod = req.body.paymentMethod;
+        if (!paymentMethod) {
+            paymentMethod = "Server_Fallback_COD";
+        }
+
         const newOrder = new orderModel({
             userId:req.body.userId,
             items:req.body.items,
             amount:req.body.amount,
             address:req.body.address,
-            paymentMethod:req.body.paymentMethod,
+            paymentMethod: paymentMethod,
             date: Date.now()
         })
         await newOrder.save();
