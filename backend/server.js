@@ -7,6 +7,8 @@ import 'dotenv/config'
 import cartRouter from "./routes/cartRoute.js"
 import orderRouter from "./routes/orderRoute.js"
 
+import orderModel from "./models/orderModel.js"
+
 //app config
 const app = express()
 const port = process.env.PORT || 4000; 
@@ -27,7 +29,8 @@ app.use("/api/order",orderRouter)
 
 
 app.get("/",(req,res)=>{
-    res.send("API Working - v4 (Debug Mode)")
+    const schemaKeys = Object.keys(orderModel.schema.paths);
+    res.send(`API Working - v5. Schema: ${schemaKeys.join(", ")}`)
 })
 
 app.listen(port , ()=>{
