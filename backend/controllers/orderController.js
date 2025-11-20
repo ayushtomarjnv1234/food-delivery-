@@ -17,13 +17,14 @@ const placeOrder = async (req,res) => {
             items:req.body.items,
             amount:req.body.amount,
             address:req.body.address,
-            paymentMethod:req.body.paymentMethod
+            paymentMethod:req.body.paymentMethod,
+            date: Date.now()
         })
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId,{cartData:{}});
 
         if (req.body.paymentMethod === "COD") {
-            res.json({success:true,message:"Order Placed"})
+            res.json({success:true,message:"Order Placed via COD"})
             return;
         }
 
