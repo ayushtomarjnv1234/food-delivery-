@@ -8,21 +8,28 @@ console.log(process.env.STRIPE_SECRET_KEY);
 //placing user order for frontend
 const placeOrder = async (req,res) => {
 
-    const frontend_url = "http://localhost:5174"
+    const frontend_url = process.env.FRONTEND_URL || "http://localhost:5173";
 
     try {
+        console.log("Place Order Request Body:", req.body); // Debug log
         const newOrder = new orderModel({
             userId:req.body.userId,
             items:req.body.items,
             amount:req.body.amount,
-            address:req.body.address
+            address:req.body.address,
+            paymentMethod:req.body.paymentMethod || "Stripe"
         })
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId,{cartData:{}});
 
+        if (req.body.paymentMethod === "COD") {
+            res.json({success:true,message:"Order Placed"})
+            return;
+        }
+
         const line_items = req.body.items.map((item)=>({
            price_data:{
-            currency:"usd",
+            currency:"inr",
             product_data:{
                 name:item.name
             },
@@ -33,7 +40,7 @@ const placeOrder = async (req,res) => {
 
         line_items.push({
             price_data:{
-                currency:"usd",
+                currency:"inr",
                 product_data:{
                     name:"Delivery Charges"
                 },
@@ -107,6 +114,9 @@ const listOrders = async (req,res) => {
 const updateStatus = async (req,res) => {
       try {
         await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status});
+        if (req.body.status === "Delivered") {
+          await orderModel.findByIdAndUpdate(req.body.orderId,{payment:true});
+        }
         res.json({success:true,message:"Status Updated"})
       } catch (error) {
         console.log(error);
