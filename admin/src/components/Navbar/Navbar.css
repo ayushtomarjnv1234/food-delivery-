@@ -12,3 +12,15 @@
 .navbar .profile{
     width: 40px;
 }
+
+@media (max-width: 768px) {
+    .navbar{
+        padding: 8px 2%;
+    }
+    .navbar .logo{
+        width: 60px;
+    }
+    .navbar .profile{
+        width: 35px;
+    }
+}

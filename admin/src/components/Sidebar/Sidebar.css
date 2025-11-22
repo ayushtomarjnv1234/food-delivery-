@@ -31,7 +31,33 @@
 }
 
 @media (max-width:900px){
+    .sidebar{
+        width: 80px;
+        min-width: 80px;
+    }
+    .sidebar-options{
+        padding-left: 10%;
+        padding-top: 30px;
+    }
+    .sidebar-option{
+        padding: 10px 5px;
+        justify-content: center;
+    }
     .sidebar-option p{
         display: none;
+    }
+    .sidebar-option img{
+        width: 20px;
+    }
+}
+
+@media (max-width: 480px){
+    .sidebar{
+        width: 60px;
+        min-width: 60px;
+    }
+    .sidebar-options{
+        padding-left: 5%;
+        gap: 15px;
     }
 }
